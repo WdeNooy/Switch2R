@@ -267,7 +267,7 @@ div.tocify {
 1,2<br><div class="abstract">
 <p class="abstract">Abstract</p>
 <p>This is a concise introduction to using R for reproducible statistical analyses. It is meant to function as a guide and reference work for researchers who start using R and R Markdown or who have not used R or R Markdown for some time.</p>
-<p>This document itself uses R for analyses and it is written in R Markdown. As such, it exemplifies the topics that it discusses. The R Markdown document can be downloaded from @@@@.</p>
+<p>This document itself uses R for analyses and it is written in R Markdown. As such, it exemplifies the topics that it discusses. The R Markdown document can be downloaded from <a href="https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd" class="uri">https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd</a>.</p>
 <!-- https://tinyurl.com/ybremelq -->
 </div>
 
@@ -510,7 +510,7 @@ glbwarm_csv &lt;- read_csv(&quot;glbwarm.csv&quot;)</code></pre>
 <li><code>character</code> for textual data.</li>
 </ul>
 <p>In this example, all variables are read as numeric with (possibly) decimal places. For <em>ideology</em>, <em>sex</em>, and <em>partyid</em> we only have numbers. We must remember the meaning of these numbers ourselves.</p>
-<p>If you want to have the value labels instead of the numeric codes for the categorical variables, you can export the SPSS file to CSV (in SPSS: File &gt; Export &gt; CSV Data) with the option <em>Save value labels where defined instead of data values</em> checked. This CSV, named <em>glbwarm2.csv</em> is <a href>available here</a>. If you import this data file with the <code>read_csv()</code> function, <em>ideology</em>, <em>sex</em>, and <em>partyid</em> are string variables. In contrast to SPSS, R handles string variables as categorical variables, just like factors. The code below shows how you can set the types of variables with <code>read_csv()</code>.</p>
+<p>If you want to have the value labels instead of the numeric codes for the categorical variables, you can export the SPSS file to CSV (in SPSS: File &gt; Export &gt; CSV Data) with the option <em>Save value labels where defined instead of data values</em> checked. This CSV, named <em>glbwarm2.csv</em> is <a href="https://wdenooy.github.io/Switch2R/glbwarm2.csv">available here</a>. If you import this data file with the <code>read_csv()</code> function, <em>ideology</em>, <em>sex</em>, and <em>partyid</em> are string variables. In contrast to SPSS, R handles string variables as categorical variables, just like factors. The code below shows how you can set the types of variables with <code>read_csv()</code>.</p>
 <pre class="r"><code># Read the CSV file exported from SPSS and store it in a data frame.
 # Note: The data file glbwarm.csv must be present in the project directory.
 glbwarm2_csv &lt;- read_csv(&quot;glbwarm2.csv&quot;,
