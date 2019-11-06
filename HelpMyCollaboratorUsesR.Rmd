@@ -20,8 +20,8 @@ authornote: |
 abstract: |
   This is a concise introduction to using R for reproducible statistical analyses. It is meant to function as a guide and reference work for researchers who start using R and R Markdown or who have not used R or R Markdown for some time. 
   
-  This document itself uses R for analyses and it is written in R Markdown. As such, it exemplifies the topics that it discusses. The R Markdown document can be downloaded from https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd.
   
+  This document itself uses R for analyses and it is written in R Markdown. As such, it exemplifies the topics that it discusses. The R Markdown document can be downloaded from https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd. The PDF version is available at https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.pdf.
   <!-- https://tinyurl.com/ybremelq -->
 keywords          : "R; statistical analyses; reproducible research; R Markdown"
 wordcount         : "(to be added manually)"
@@ -37,13 +37,13 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "doc" #Oher options: "jou" (journal format), "man" (manuscript format)
 output            :
+  papaja::apa6_pdf: 
+    toc: no         #no table of contents
+    number_sections: true #number sections (for referencing)
   bookdown::html_document2: #additional HTML output option
     toc: yes        #with a table of contents
     toc_depth: 3    #using three levels
     toc_float: yes  #which is situated in the left margin
-  papaja::apa6_pdf: 
-    toc: no         #no table of contents
-    number_sections: true #number sections (for referencing)
   papaja::apa6_word:
     toc: no         #no table of contents
 geometry: #page setup for PDF (LaTeX) output
@@ -625,7 +625,7 @@ govact_tidy2 %>%
   )
 ```
 
-It is possible to have models side-by-side (Table \@ref(tab:regressiontablecustom2)) but it requires some data wrangling. If you want to see the code, download the [R Markdown file](linktobeadded) that produces this paper. You can adapt this code for your own applications.
+It is possible to have models side-by-side (Table \@ref(tab:regressiontablecustom2)) but it requires some data wrangling. If you want to see the code, download the [R Markdown file](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd) that produces this paper. You can adapt this code for your own applications.
 
 ```{r regressiontablecustom2, echo=FALSE}
 # Table with two regression models side-by-side.
@@ -1130,11 +1130,11 @@ The [TimeSeries task view](https://cran.r-project.org/web/views/TimeSeries.html)
 
 The document that you are reading at this moment was created in R. It contains both the text that you are reading and the R code analyzing the data and creating the tables and plots displaying the results. The document is written in R Markdown, a relatively simple text processor. R Markdown documents can be rendered into PDF (LaTeX), HTML, and sometimes Word documents. 
 
-Anyone who has the R MArkdown document and the data sets used in it can reproduce the results as well as the results tables and plots. Every step in the analysis process and every report detail can be checked and, where necessary, criticized and improved. Mastering R and understanding the structure of an R Markdown document makes the analyses and report fully transparent.
+Anyone who has the R Markdown document and the data sets used in it can reproduce the results as well as the results tables and plots. Every step in the analysis process and every report detail can be checked and, where necessary, criticized and improved. Mastering R and understanding the structure of an R Markdown document makes the analyses and report fully transparent.
 
 ## Integrating Text and Code {#integratingtextcode}
 
-Download the R Markdown document [HelpMyCollaboratorUsesR.Rmd](linktobeadded) that generates the document you are now reading, save it to your current R project directory, and open it in RStudio to see an example. The document illustrates many features of R Markdown, so you may use it as a reference for your own work. If you see a feature in the PDF or web version of the document that you want to use, check the R Markdown document to find out how it is done. 
+Download the R Markdown document [HelpMyCollaboratorUsesR.Rmd](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd) that generates the document you are now reading, save it to your current R project directory, and open it in RStudio to see an example. The document illustrates many features of R Markdown, so you may use it as a reference for your own work. If you see a feature in the [PDF](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.pdf) or web version of the document that you want to use, check the R Markdown document to find out how it is done. 
 
 ### Code chunks
 
@@ -1185,7 +1185,7 @@ With the `bookdown` package in place, you can reference a table or figure using 
 
 If you want to cross-reference a section, you have to add a label to the section header, for example, `{#crossreferences}` for the present section. Now, `\@ref(crossreferences)` inserts the number of this section in a sentence, for example, this is a reference to Section \@ref(crossreferences).
 
-References to literature are best created from a BibTeX database. In a BibTeX database, each entry has an identifier, for example,`WickhamDataScienceImport2017` could be the identifier of the _R for Data Science_ book. In the top of the R Markdown document (also called the YAML front matter), the name of your BibTeX-file should be mentioned in the `bibliography:` field. See the R Markdown document [_HelpMyCollaboratorUsesR.Rmd_](linktobeadded) for an example.
+References to literature are best created from a BibTeX database. In a BibTeX database, each entry has an identifier, for example,`WickhamDataScienceImport2017` could be the identifier of the _R for Data Science_ book. In the top of the R Markdown document (also called the YAML front matter), the name of your BibTeX-file should be mentioned in the `bibliography:` field. See the R Markdown document [_HelpMyCollaboratorUsesR.Rmd_](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd) for an example.
 
 To include a reference to this book, add `[@WickhamDataScienceImport2017]` in your sentence. The square brackets `[]` will be replaced by parentheses. Omit the brackets if you do not want to have parentheses. If you do not want to show the author names, put a minus sign before `@`. You can add text within the brackets, for example: `[see @WickhamDataScienceImport2017: 211]`.
 
@@ -1249,7 +1249,7 @@ new_function_name <- function (argument1, argument2 = 0) {
 
 If you are part of a team working on the same research project, you would like to have an easy way of working with several people on the same R Markdown document. What changes and additions do your collaborators make to the document and how do they comment on your work? If at some point mistakes have been introduced, can we roll back to a previous version?
 
-Version control software combined with a cloud repository offers an answer to these questions. _Git_ is popular version control software and _Github_ is a cloud repository designed for working with Git. RStudio projects can be linked to Git and Github, see [Using Version Control with RStudio](https://support.rstudio.com/hc/en-us/articles/200532077) and links on that page for details (a good resource is [Happy Git and Github for the useR](http://happygitwithr.com/)).
+Version control software combined with a cloud repository offers an answer to these questions. _Git_ is popular version control software and _Github_ is a cloud repository designed for working with Git. RStudio projects can be linked to Git and Github, see [Using Version Control with RStudio](https://support.rstudio.com/hc/en-us/articles/200532077) and links on that page for details (a good resource is [Happy Git and Github for the useR](http://happygitwithr.com/)). This document uses Git and [Github](https://github.com/WdeNooy/Switch2R).
 
 Once an RStudio project is linked to Git, the top-right panel in the RStudio interface contains a _Git_ tab for easy synchronization of the local R Markdown document that you are working on and the remote document in the cloud (Github repository) that is accessible to all collaborators. 
 
