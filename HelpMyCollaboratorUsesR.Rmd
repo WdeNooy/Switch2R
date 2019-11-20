@@ -7,7 +7,7 @@ author:
     corresponding : yes    # Define only one corresponding author
     address       : "Nieuwe Achtergracht 166, 1018 WV Amsterdam" # "Postal address"
     email         : "w.denooy@uva.nl"
-  - name          : "Second (Third, ...) Author" # An optional second author. Repeat name and affilitation for more authors.
+  - name          : "Optional Second (Third, ...) Author - see .Rmd file" # An optional second author. Repeat name and affilitation for more authors.
     affiliation   : "1,2"
 affiliation:
   - id            : "1"
@@ -17,13 +17,14 @@ affiliation:
 authornote: |
   Wouter de Nooy, Department of Communication Science, University of Amsterdam.
 abstract: |
-  This is a concise introduction to using R for reproducible statistical analyses. It is meant to function as a guide and reference work for researchers who start using R and R Markdown or who have not used R or R Markdown for some time. 
+  This is a concise introduction to using R for reproducible statistical analyses. It offers a guide and reference for researchers who want to perform statistical analyses in R or write reproducible reports in R Markdown but are new to the software or have not used it for some time. They want it done as soon as possible and their data is ready for analysis.
   
   
-  This document itself uses R for analyses and it is written in R Markdown. As such, it exemplifies the topics that it discusses. The R Markdown document can be downloaded from https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd. The PDF version is available at https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.pdf.
   
+  
+  Instead of a bottom-up introduction to R and R Markdown, this paper presents examples, which researchers can adapt for their own use. Imitate and apply! R code is shown that can be adapted by changing names of data sets and variables. This document itself is written in R Markdown. Just download the R Markdown document (https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd) to see how things are done. 
+  A PDF version of this web page is available at https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.pdf.
   <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-  
   <!-- https://tinyurl.com/ybremelq -->
 keywords          : "R; statistical analyses; reproducible research; R Markdown"
 wordcount         : 6874 "(added manually using the wordcountaddin add-in)"
@@ -39,13 +40,13 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "doc" #Other options: "jou" (journal format), "man" (manuscript format)
 output            :
+  papaja::apa6_pdf: 
+    toc: no         #no table of contents
+    number_sections: true #number sections (for referencing)
   bookdown::html_document2: #additional HTML output option
     toc: yes        #with a table of contents
     toc_depth: 3    #using three levels
     toc_float: yes  #which is situated in the left margin
-  papaja::apa6_pdf: 
-    toc: no         #no table of contents
-    number_sections: true #number sections (for referencing)
   papaja::apa6_word:
     toc: no         #no table of contents
 geometry: #page setup for PDF (LaTeX) output
@@ -115,12 +116,12 @@ knitr::write_bib(c("base", "knitr", "tidyverse", "papaja", "dplyr", "haven", "re
 
 # Why Use R?
 
-Because you want to be one of the nerds. Instead of publicly acknowledging this deep-felt need, you resort to arguments such as:
+Why Use R? Because you want to be one of the nerds. Instead of publicly acknowledging this deep-felt need, you resort to arguments such as:
 
 * I want to be up-to-date. The latest developments in data handling and analysis are implemented (first) in R.
 * I want to do all my work in one environment. From data scraping via all kinds of analyses to publishing papers and books, all can be done in R.
 * I want my analyses to be reproducible. All steps from data cleaning to final results can be specified and documented in one document in R.
-* I want to be in full control of my analyses, tables, and figures. I do not want to depend on defaults set by the software creator.
+* I want maximum flexibility and full control of my analyses, tables, and figures.
 * I want to use free, open source software, so everybody can check and improve my work. 
 
 # Start Working with R
@@ -140,13 +141,13 @@ For a _UvA-supported laptop_:
 * Install R from the Software Center. Be sure to select the staff version (_R-Project MDW_), which allows installing packages (Section \@ref(packages)) locally on your computer.
 * Install RStudio  from the Software Center.
 
-Use the same procedure to update to a newer version of R.
+Use the same procedure to update to a newer version of R. If you update R, you do not have to update RStudio (or the other way around).
 
 If you want to know more about R and the organization behind R (CRAN), visit https://www.r-project.org/.
 
 ## Install RStudio
 
-Install RStudio (Desktop, Open Source License) from http://www.rstudio.com/download:
+When R has been installed, you can install RStudio (Desktop, Open Source License) from http://www.rstudio.com/download:
 
 * Select your operating system.
 * Download and install.
@@ -162,7 +163,7 @@ Create a new project:
 * Use the menu _File>New Project..._  or the _Create a project_ button.
 * Select _New Directory_ to start a project in a brand new working directory or select _Existing Directory_ to create a new project in an existing directory.
 
-The directory name is the name of the project. It is called _Modernisering_ in Figure \@ref(fig:RStudio).
+The directory name is the name of the project. It is called _Switch2R_ in Figure \@ref(fig:RStudio).
 
 When you start RStudio, R starts automatically. The project that was open when you last closed RStudio will be reopened. If you want to open another project, use _Open Project..._ in the  _File_ menu or use the drop-down list of projects in the top-right of the RStudio interface.
 
@@ -182,27 +183,29 @@ RStudio (and R) does not have a menu offering all possible data manipulations an
 
 The general R layout of a command: `y <- f(x, arg = z)`
 
-This command means: Do something (function `f(arg = z)`) to data object `x` and store the result in data object `y`.
+This command means: Do something (function `f(arg = z)`) to `x` and save the result in `y`.
 
-If the left-hand data object (`y`):  
+Both `x` and `y` can be a data set, a single value, a vector (series) of values, (code to create) a plot, analysis results, and so on. An important difference between R and SPSS is that R stores analysis results in such a way that you can use them in a next step of the analysis. You can extract the results that you are interested in and use them in calculations, tables, or plots (see Section \@ref(firstanalysis)). This gives you maximum flexibility and full control.
+
+Let us refer to `x` and `y` as _data objects_. 
+
+If the left-hand data object `y`:  
 
 * does not exist: a new data object is created in the project environment.
-* exists: data object is overwritten in the project environment.  
+* exists: data object is overwritten in the project environment. There cannot be more than one data object with the same name.
 * is not named: output is sent to the screen (console or plot area).
 
-If no function is specified, the data object (`x`) will be simply copied to another data object or to the screen, depending on `y`.
+If no function is specified as in `y <- x`, the data object (`x`) will be simply copied to another data object or to the screen, depending on `y`.
 
-A data object can be a data set, a list of analysis results, a function, or (code to create) a plot. An important difference between R and SPSS is that R stores analysis results in such a way that you can use them in a next step of the analysis. You can extract the results that you are interested in and use them in calculations, tables, or plots (see Section \@ref(firstanalysis)).
-  
 ### Options are arguments to functions
 
-A function can take more input from the user than just a data object (`x`). Additional input are arguments that have a name (`arg`, for example). The arguments for a function and their default values are listed in the help for the function (the vignette). The user may specify the value of arguments or rely on the default settings. 
+A function can take more input from the user than just a data object (`x`). Additional input are arguments that have a name (`arg`, for example). The arguments for a function and their default values are listed in the help for the function (the vignette). The user may specify the value of arguments or rely on the default settings. For example, the `mean()` function does _not_ remove missing values (`NA` in R) as default: `na.rm = FALSE`. If there is a missing value, the resulting mean is a missing value. That is great to warn you about missing values, but you would probably want to remove them. Set the `na.rm = ` argument to `TRUE` (note the capitals).
 
 > Separate arguments and the data object by commas!
 
 Sometimes, you can supply more than one value for an argument. For example, the `quantile()` function can calculate several quantiles in one go. If you have to specify more than on value, enumerate them within the `c()` function, which creates a vector or list. 
 
-Below are some examples of commands and the textual output that the `summary` function sends to the console, which also feature in Figure \@ref(fig:RStudio). Note that R is case-sensitive: uppercase letters are considered different letters than lowercase letters.
+Below are some examples of commands and the textual output that the `summary` function sends to the console, which also feature in Figure \@ref(fig:RStudio). Note that R is _case-sensitive_: uppercase letters are considered different letters than lowercase letters.
 
 ```{r store_results, eval=FALSE}
 # Note that this code chunk is not executed (eval = FALSE).
@@ -231,7 +234,7 @@ The `mean()` and `quartiles()` functions require a variable: extra sleeping time
 
 > In R, you can retrieve an item from a list with the `$` character.
 
-We get the extra sleeping time variable (`extra`) from the `sleepdata` data frame by first specifying the name of the data frame, adding a dollar sign, and finally the name of the variable (list item): `sleepdata$extra`. If you are typing a command at the R prompt in RStudio, a popup menu will list the items that are available once you add the dollar sign to the name of a data frame.
+We get the extra sleeping time variable (`extra`) from the `sleepdata` data frame by first specifying the name of the data frame, adding a dollar sign, and finally the name of the variable (list item): `sleepdata$extra`. If you are typing a command at the R prompt in RStudio, a popup menu will list the items that are available once you add the dollar sign to the name of a data frame that is present in the environment.
 
 Results from statistical analyses (Section \@ref(firstanalysis) and on) are also stored as lists. We can use the dollar sign to extract the parts of the results that we are interested in.
 
@@ -260,9 +263,9 @@ Section \@ref(integratingtextcode) discusses a third option for running commands
 
 A data object created by an R command is saved in memory, which is called the project's environment. Data objects in the environment are directly accessible to R.
 
-When you exit RStudio (and R), the data objects in the environment are deleted: memry is cleared. It is possible to save all data objects in memory as a file on disk, which is called a _work space_, with the default file extension _.RData_. 
+When you exit RStudio (and R), the data objects in the environment are deleted: memory is cleared. It is possible to save all data objects in memory as a file on disk, which is called a _work space_, with the default file extension _.RData_. 
 
-Actually, RStudio saves the work space by default when you exit RStudio. This may sound great but it is strongly recommended NOT to save the work space. Your R code in the syntax file should create all data objects that you need. Your workspace, however, may contain additional objects that you created with the console or with syntax commands that have been removed. If you rerun the syntax when you reopen an RStudio project, you can check that all necessary data objects are created. If not, you will receive an error message.
+Actually, RStudio saves the work space by default when you exit RStudio. This may sound great but it is strongly recommended NOT to save the work space. Your R code in the syntax file should create all data objects that you need. Your work space, however, may contain additional objects that you created with the console or with syntax commands that have been removed. If you rerun the syntax when you reopen an RStudio project, you can check that all necessary data objects are created. If not, you will receive an error message.
 
 For this reason, it is a good idea to turn off saving work spaces when exiting RStudio and reloading them when reopening a project in RStudio. To this end, adjust the settings in the _Tools_ menu under _Global Options_ as indicated in Figure \@ref(fig:RStudiosettings).
 
@@ -316,7 +319,7 @@ Loading a package, R may inform you of conflicts. Different packages can use the
 
 ## Getting Help
 
-Read more about installing and using R and RStudio in the (web) books [Modern Dive](https://moderndive.com/1-getting-started.html) [@IsmayIntroductionStatisticalData] and [Getting used to R, RStudio, and R Markdown](https://ismayc.github.io/rbasics-book/3-rstudiobasics.html). The latter book has a nice [section on common programming errors in R](https://ismayc.github.io/rbasics-book/6-errors.html). I bet that you will encounter some of these problems.
+Read more about installing and using R and RStudio in the (web) books [Modern Dive](https://moderndive.com/1-getting-started.html) [@IsmayIntroductionStatisticalData] and [Getting used to R, RStudio, and R Markdown](https://ismayc.github.io/rbasics-book/3-rstudiobasics.html). The latter book has a nice [section on common programming errors in R](https://ismayc.github.io/rbasics-book/6-errors.html). I bet that you will encounter some of these problems, for example using `=` for "is equal to" where you must use `==`.
 
 The R code in Section \@ref(rcommands) shows that running a function with a question mark added to the start, e.g., `?mean`, opens the help vignette about the function. As an alternative, you can enter the function name in the search box of the help tab in the RStudio interface. In addition, pressing F1 (Mac: fn-F1) while the cursor is on a typed function name also opens the help vignette. _For getting help in these ways, the package containing the function must have been loaded._ 
 
@@ -332,9 +335,9 @@ Our example data set addresses attitudes towards global warming. The data set wa
 
 The data set is available in several formats including SPSS and CSV. The SPSS file (_glbwarm.sav_) has variable and value labels but the CSV file (_glbwarm.csv_) only has numeric values. Download the data sets and save them in your R project directory.
 
-### Import SPSS data
+### Import SPSS (or STATA or SAS) data
 
-The recommended function to load an SPSS data file in R is `read_spss()` in the `haven` package [@R-haven]. This function reads SPSS data and turns it into a _data frame_, which is the R version of a data matrix.
+The recommended function to load an SPSS data file in R is `read_spss()` in the `haven` package [@R-haven]. This function reads SPSS data and turns it into a _data frame_, which is the R version of a data matrix. The `haven` package can also import STATA (DTA) and SAS data files.
 
 ```{r readSPSS}
 # Load the haven package for reading SPSS data files.
@@ -482,7 +485,7 @@ If you are looking at web version of Table \@ref(tab:papajatable), you will prob
 
 The `apa_table()` function can also combine results from two or more regression models in one table. Results for different models are stacked: the first set of rows contain the results for the first model, the second set of rows contain the second model, and so on. The more familiar table with the models spread over different columns (side-by-side) cannot be made with this package. 
 
-The `stargazer` package [@R-stargazer] can create side-by-side tables It can create tables in formats required by some important sociological, political sciences, and economics journals. Unfortunately, it does not support the APA6 style. In contrast to the `papaja`package, it can also create HTML tables but it cannot create Word tables (import the PDf or HTML table in Word). It is possible to send the table created by `stargazer()` to a file, so you can include the code from the file in your (LaTeX or HTML) document. 
+The `stargazer` package [@R-stargazer] can create side-by-side tables It can create tables in formats required by some important sociological, political sciences, and economics journals. Unfortunately, it does not support the APA6 style. In contrast to the `papaja`package, it can also create HTML tables but it cannot create Word tables (import the PDF or HTML table in Word). It is possible to send the table created by `stargazer()` to a file, so you can include the code from the file in your (LaTeX or HTML) document. 
 
 You can create a Word document with a regression results table in APA6 format with the `apa.reg.table()` function in the `apaTables` package [@R-apaTables]. Note that it cannot show models side-by-side. This package can also create correlation and ANOVA tables. The `texreg` package [@R-texreg] can create and save a table with several regression models side-by-side as PDF (`texreg()`) or HTML (`htmlreg()`).
 
@@ -490,9 +493,9 @@ You can create a Word document with a regression results table in APA6 format wi
 
 > This section is meant for readers who want to have full control over the tables they create.
 
-Instead of using packages that may produce tables that are not exactly what you want, you can create results tables yourself using the `broom` package [@R-broom], which is part of `tidyverse` but it must be loaded separately. The `broom`package extracts relevant results from statistical data objects as a data frame. This data frame can be easily manipulated and printed as a publication-ready table with the general `knitr` package [@R-knitr], with the finer details managed by the `kableExtra` package [@R-kableExtra]. 
+Instead of using packages that may produce tables that are not exactly what you want, you can create results tables yourself using the `broom` package [@R-broom], which is part of `tidyverse` but it must be loaded separately. The `broom` package extracts relevant results from statistical data objects as a data frame. This data frame can be saved as CSV file, which can be manually transformed into publication-ready tables using your favorite spreadsheet or word processor software. As an alternative, it can be manipulated and printed as a publication-ready table with R using the general `knitr` package [@R-knitr], with finer details managed by the `kableExtra` package [@R-kableExtra]. 
 
-It takes a little bit more time to learn using `knitr` but it is a good investment because you are probably going to use `knitr` anyway for tables that do not contain statistical results. The fine thing about `knitr` is that it gives good results in HTML, LaTeX, and Word.
+It takes a some time to learn using `knitr` but it is a good investment because you are probably going to use `knitr` anyway for tables that do not contain statistical results. The nice thing about `knitr` is that it gives good results in HTML, LaTeX, and Word.
 
 The `tidy()` function in the `broom` package extracts the estimated coefficients and associated test statistics and confidence levels from the data object containing statistical results. There is a version of this function for many types of statistical analyses (more than `apa_print()` can handle). You can just use `tidy()` because it will recognize the type of statistical analysis and use the appropriate version to extract the results for this type of analysis.
 
@@ -521,6 +524,12 @@ kable(govact_tidy2, #the regression coefficients
       format.args = list(zero.print = NULL),
       booktabs = TRUE #layout with header and bottom lines in PDF output
       )
+
+# Alternatively, save the tidied results data frame as CSV for use in, for
+# example, MS Excel and MS Word.
+write_csv(govact_tidy2, "myresultstable.csv")
+# Note: use write_csv2() if you want semicolons instead of commas to separate
+# columns, which is required if your computer uses comma as decimal separator.
 ```
 
 This table is not as it should be according to the APA6 standard. The dependent variable should be mentioned, the column names should be different, not all columns should be shown and the lower and upper limits of the confidence interval should be merged, p values below .005 should not be rounded to .000. In addition,the predictor variable names could be more informative. Finally, the model's _R^2^_ and _F_ values should be reported and significance levels should be signaled with stars, which are explained in a note to the table.
@@ -528,6 +537,15 @@ This table is not as it should be according to the APA6 standard. The dependent 
 This requires quite some data wrangling, which is exemplified in the code below. In addition, we need the `kableExtra` package [@R-kableExtra] for additional formatting of the table and adding a note.
 
 ```{r regressiontablecustom}
+# Use this code for your own purpose:
+# 1. Change the name of the fitted model: replace govac_model2 everywhere.
+# 2. Change the old and new names of variables/parameters in mutate().
+# 3. Change the names in functions caption() and add_header_above().
+
+# Required packages.
+library(tidyverse)
+library(broom)
+library(knitr)
 # Load the kableExtra package for fine-tuning the table.
 library(kableExtra)
 
@@ -788,7 +806,7 @@ It becomes more and more common to plot regression coefficients instead of prese
 library(coefplot)
 
 # Plot of the regression coefficients of two models.
-multiplot(govact_model, govact_model2, #the fitted models
+multiplot(Model1 = govact_model, Model2 = govact_model2, #the fitted models (renamed)
           intercept = FALSE, #don't show intercept coefficient
           title = "", #omit plot title
           newNames = c("negemot" = "Negative emotions",
@@ -798,8 +816,6 @@ multiplot(govact_model, govact_model2, #the fitted models
                        ),
           plot.shapes=TRUE, plot.linetypes=TRUE,
           dodgeHeight = 0.8 #distance between shapes
-          #custom names for the models
-          # names = c("Without interaction", "Neg. emotions*Age interaction")
           ) +
   theme_apa() +
   theme(legend.position="bottom")
@@ -878,6 +894,13 @@ Note that the data frame must be specified for both variables.
 The fitted model is (stored as) a `htest` object, which includes both statistical results (chi-squared value, degrees of freedom, and p value) and the contents of the contingency table: observed frequencies, expected frequencies under the null hypothesis of independence, residuals, and standardized residuals. You can inspect the contingency table by simply sending the list item to the screen, for example, `fit_chisq$observed` or `fit_chisq$stdres`. The code below creates an APA6-style contingency table.
 
 ```{r chisqtable}
+# Use this code for your own results:
+# 1. Change the names of the data frame and variables in chisq.test().
+# 2. Change the category names of the columns in select() and
+#    add_header_above(): replace female and male.
+#    If there are more than two columns (values), add those.
+# 3. Change the table's caption()
+
 # Create a contingency table with observed frequencies and standardized
 # residuals.
 
@@ -901,7 +924,7 @@ data.frame( #create a data frame from
       booktabs = TRUE #layout with header and bottom lines
       ) %>%
   kable_styling(
-    #don't move table to top or bottomos a page
+    #don't move table to top or bottom of a page
     latex_options = c("hold_position")
   ) %>%
   #add observed versus standardized residuals header
@@ -930,7 +953,7 @@ Some regression models for dependent variables that are not numeric and (in prin
 * `poisson(link = "log")` for Poisson regression,
 * `quasipoisson(link = "log")` for overdispersed Poisson regression.
 
-A fitted `glm()` model is very like a fitted `lm()` model, so functions for displaying coefficients (`coefplot` package) and fitted regression lines (`visreg` package) also work for these models. Thefunctions in the `car`package such as  `residualPlot()`, however, only works for linear models.
+A fitted `glm()` model is very like a fitted `lm()` model, so functions for displaying coefficients (`coefplot` package) and fitted regression lines (`visreg` package) also work for these models. The functions in the `car`package such as  `residualPlot()`, however, only works for linear models.
 
 Negative-binomial regression models can be fit with the `glm.nb()` function in the `MASS` package. This function follows the same logic as the `lm()` function for ordinary regression models. Instead of a model family, you can specify a link function as an argument. A fitted negative-binomial model has a structure that is similar to the results of `lm()` and `glm()`. The `car` and `coefplot` packages, however, cannot handle this type of model.
 
@@ -977,7 +1000,10 @@ summary(fit_indirect)
 It is more attractive to present the direct and indirect effects in a diagram. The code below creates a diagram using the `ggplot2` package.
 
 ```{r mediation1plot, fig.asp=0.3, fig.cap="Main results of a mediation model presented as a causal diagram."}
-# Plot the mediation diagram with ggplot2.
+# Plot the mediation diagram with ggplot2. 
+# NOTE: Make sure that you have stored the mediation results in an object named
+# fit_indirect. Change the outcome variable name in the code below.
+
 # Create coordinates for the variable names.
 data.frame(x = c(0.3, 0.5, 0.7), #hor. coordinates of labels
            y = c(0.1, 0.3, 0.1), #vert. coordinates of labels
@@ -985,7 +1011,7 @@ data.frame(x = c(0.3, 0.5, 0.7), #hor. coordinates of labels
            vjust = c(0.5, 0, 0.5),
            label = c(fit_indirect$treat, #treatment
                      fit_indirect$mediator, #moderator
-                     "govact"), #outcome variable
+                     "govact"), #outcome variable name       ## ADAPT! ##
            # Create start and end coordinates for the arrows
            xstart = c(0.3, 0.3, 0.5),
            xend = c(0.5, 0.7, 0.7),
@@ -1038,9 +1064,9 @@ In contrast, a positive correlation between the residuals decreases the size of 
 
 ### Package `psych`
 
-As an alternative, the `psych` package [@R-psych] also offers a `mediate()` function to estimate a mediation model. It handles models with a single mediator and models with parallel mediation: two or more mediators without effects between mediators. Like the PROCESS macro for SPSS [@HayesIntroductionMediationModeration2013], the `psych::mediat()` function performs all regression analyses in one go and it uses bootstrapping to estimate the confidence interval of the indirect effect.
+As an alternative, the `psych` package [@R-psych] also offers a `mediate()` function to estimate a mediation model. It handles models with a single mediator and models with parallel mediation: two or more mediators without effects between mediators. Like the PROCESS macro for SPSS [@HayesIntroductionMediationModeration2013], the `mediat()` function in the  package performs all regression analyses in one go and it uses bootstrapping to estimate the confidence interval of the indirect effect.
 
-This function automatically plots the results as a causal diagram. It cannot handle factors, so you have to replace them by 0/1 variables beforehand. The following code shows how to create a dichotomous variable `female` (0 = no, 1 = yes) fom the factor `sex` in `glbwarm_spss` (using the `tidyverse` function `mutate()`):
+This function automatically plots the results as a causal diagram. It cannot handle factors, so you have to replace them by 0/1 variables beforehand. The following code shows how to create a dichotomous variable `female` (0 = no, 1 = yes) from the factor `sex` in `glbwarm_spss` (using the `tidyverse` function `mutate()`):
 
 `glbwarm_spss <- mutate(glbwarm_spss, female = ifelse(sex == 'female', 1, 0))`
 
@@ -1053,12 +1079,12 @@ Moderation in linear regression analysis is exemplified in Section \@ref(customt
 Mean-centering of predictor or moderator variables is relatively easy, because we directly get the mean of a variable with the `mean()` function.
 
 ```{r meancentering, eval=FALSE}
-# Mean-centering in basic R (ignoring missing values.
+# Mean-centering in basic R, ignoring missing values.
 dataset$newvariable <- dataset$variable - mean(dataset$variable, na.rm = TRUE)
-# Mean-centering with tidyverse (ignoring missing values.
+# Mean-centering in the data frame with tidyverse, ignoring missing values.
 dataset <- dataset %>%
   mutate(newvariable = variable - mean(dataset$variable, na.rm = TRUE))
-# Mean-centering within a regression formula (ignoring missing values.
+# Mean-centering within a regression formula, ignoring missing values.
 fit <- lm(y ~ I(variable - mean(dataset$variable, na.rm = TRUE))*anothervariable)
 ```
 
@@ -1068,9 +1094,9 @@ Multilevel models can be estimated with the the `nlme` package [@R-nlme] or `lme
 
 In the functions of the `nlme`package, `lme()` for linear models and `nlme()` for non-linear models, the fixed effects of the model are specified with a formula in the usual way. In addition, the `random =` argument specifies effects that vary at a higher level.
 
-The functions `lmer()` and `glmer()` in the `lme4` package estimate multilevel models for linear and generalized linear models respectively. Random effects are added to the model formula using a vertical bar (`|`). For example, `(1 | subject)` adds random intercepts at the subject level, while `(1 + age | subject)` adds varying intercepts and varying slopes for age at the subject level as well as a covariance between the random intercepts and slopes. Note that `subject` must be the name of a variable identifying subjects as higher level units. For a discussion of specifiyng more complicated multilevel models, see [Using R and lme/lmer to fit different two- and three-level longitudinal models](https://rpsychologist.com/r-guide-longitudinal-lme-lmer) [@magnussonUsingLmeLmer2015].
+The functions `lmer()` and `glmer()` in the `lme4` package estimate multilevel models for linear and generalized linear models respectively. Random effects are added to the model formula using a vertical bar (`|`). For example, `(1 | subject)` adds random intercepts at the subject level, while `(1 + age | subject)` adds varying intercepts and varying slopes for age at the subject level as well as a covariance between the random intercepts and slopes. Note that `subject` must be the name of a variable identifying subjects as higher level units. For the specification of more complicated multilevel models, see [Using R and lme/lmer to fit different two- and three-level longitudinal models](https://rpsychologist.com/r-guide-longitudinal-lme-lmer) [@magnussonUsingLmeLmer2015].
 
-Non-linear multilevel models, for example, multilevel logistic regression models, are notably hard to estimate. For this type of models, a Bayesian approach with MCMC estimation is usually preferred. The `rstanarm` package [@R-rstanarm] contains functions that have the same structure and the same type of output as the multilevel functions in the `lme4` package.
+Non-linear multilevel models, for example, multilevel logistic regression models, are notably hard to estimate. For this type of models, a Bayesian approach with MCMC estimation is usually preferred. The `rstanarm` package [@R-rstanarm] contains functions that have the same structure and the same type of output as the multilevel functions in the `lme4` package. The companion manual [*Help, My Collaborator Goes Bayesian!*](https://wdenooy.github.io/Switch2Bayesian/HelpMyCollaboratorGoesBayesian.html#32_r_rstanarm_package) shows how to estimate multilevel models with the `rstanarm` package.
 
 ## Structural Equation Modelling {#sem}
 

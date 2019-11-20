@@ -1,4 +1,5 @@
 \documentclass[doc,floatsintext]{apa6}
+\usepackage{wrapfig}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -24,7 +25,7 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Help, My Collaborator Uses R! An Introduction to Reproducible Statistical Analyses in R},
-            pdfauthor={Wouter de Nooy~\& Second (Third, \ldots{}) Author},
+            pdfauthor={Wouter de Nooy~\& Optional Second (Third, \ldots{}) Author - see .Rmd file},
             pdfkeywords={R; statistical analyses; reproducible research; R Markdown},
             pdfborder={0 0 0},
             breaklinks=true}
@@ -105,15 +106,15 @@
 
   \title{Help, My Collaborator Uses R! An Introduction to Reproducible
 Statistical Analyses in R}
-    \author{Wouter de Nooy\textsuperscript{1}~\& Second (Third, \ldots{})
-Author\textsuperscript{1,2}}
+    \author{Wouter de Nooy\textsuperscript{1}~\& Optional Second (Third, \ldots{})
+Author - see .Rmd file\textsuperscript{1,2}}
     \date{}
   
 \shorttitle{Help, My Collaborator Uses R!}
 \affiliation{
 \vspace{0.5cm}
 \textsuperscript{1} Amsterdam School of Communication Research ASCoR\\\textsuperscript{2} University of Amsterdam}
-\keywords{R; statistical analyses; reproducible research; R Markdown\newline\indent Word count: (to be added manually)}
+\keywords{R; statistical analyses; reproducible research; R Markdown\newline\indent Word count: 6874 "(added manually using the wordcountaddin add-in)"}
 \usepackage{csquotes}
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -136,11 +137,9 @@ Author\textsuperscript{1,2}}
 
 \geometry{a4paper, top=30mm, bottom = 25mm, asymmetric = FALSE}
 \usepackage{float}
-\usepackage{wrapfig}
 
-\authornote{Add complete departmental affiliations for each
-author here. Each new line herein must be indented, like this line.
-Enter author note here.
+\authornote{Wouter de Nooy, Department of Communication
+Science, University of Amsterdam.
 
 Correspondence concerning this article should be addressed to Wouter de
 Nooy, Nieuwe Achtergracht 166, 1018 WV Amsterdam. E-mail:
@@ -148,16 +147,22 @@ Nooy, Nieuwe Achtergracht 166, 1018 WV Amsterdam. E-mail:
 
 \abstract{
 This is a concise introduction to using R for reproducible statistical
-analyses. It is meant to function as a guide and reference work for
-researchers who start using R and R Markdown or who have not used R or R
-Markdown for some time.
+analyses. It offers a guide and reference for researchers who want to
+perform statistical analyses in R or write reproducible reports in R
+Markdown but are new to the software or have not used it for some time.
+They want it done as soon as possible and their data is ready for
+analysis.
 
-This document itself uses R for analyses and it is written in R
-Markdown. As such, it exemplifies the topics that it discusses. The R
-Markdown document can be downloaded from
-\url{https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd}.
-The PDF version is available at
-\url{https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.pdf}.
+Instead of a bottom-up introduction to R and R Markdown, this paper
+presents examples, which researchers can adapt for their own use.
+Imitate and apply! R code is shown that can be adapted by changing names
+of data sets and variables. This document itself is written in R
+Markdown. Just download the R Markdown document
+(\url{https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd})
+to see how things are done. 
+
+This work is licensed under a Creative Commons Attribution-ShareAlike
+4.0 International License.
 
 
 }
@@ -167,7 +172,7 @@ The PDF version is available at
 
 \section{Why Use R?}\label{why-use-r}
 
-Because you want to be one of the nerds. Instead of publicly
+Why Use R? Because you want to be one of the nerds. Instead of publicly
 acknowledging this deep-felt need, you resort to arguments such as:
 
 \begin{itemize}
@@ -183,8 +188,8 @@ acknowledging this deep-felt need, you resort to arguments such as:
   I want my analyses to be reproducible. All steps from data cleaning to
   final results can be specified and documented in one document in R.
 \item
-  I want to be in full control of my analyses, tables, and figures. I do
-  not want to depend on defaults set by the software creator.
+  I want maximum flexibility and full control of my analyses, tables,
+  and figures.
 \item
   I want to use free, open source software, so everybody can check and
   improve my work.
@@ -231,15 +236,16 @@ For a \emph{UvA-supported laptop}:
   Install RStudio from the Software Center.
 \end{itemize}
 
-Use the same procedure to update to a newer version of R.
+Use the same procedure to update to a newer version of R. If you update
+R, you do not have to update RStudio (or the other way around).
 
 If you want to know more about R and the organization behind R (CRAN),
 visit \url{https://www.r-project.org/}.
 
 \subsection{Install RStudio}\label{install-rstudio}
 
-Install RStudio (Desktop, Open Source License) from
-\url{http://www.rstudio.com/download}:
+When R has been installed, you can install RStudio (Desktop, Open Source
+License) from \url{http://www.rstudio.com/download}:
 
 \begin{itemize}
 \tightlist
@@ -271,7 +277,7 @@ Create a new project:
 \end{itemize}
 
 The directory name is the name of the project. It is called
-\emph{Modernisering} in Figure \ref{fig:RStudio}.
+\emph{Switch2R} in Figure \ref{fig:RStudio}.
 
 When you start RStudio, R starts automatically. The project that was
 open when you last closed RStudio will be reopened. If you want to open
@@ -284,7 +290,7 @@ with a project opened. It features a syntax file demonstrating some R
 commands that are discussed in Section \ref{rcommands}.
 
 \begin{figure}[H]
-\includegraphics[width=6.33in]{RStudio} \caption{Main panels of the RStudio user interface.}\label{fig:RStudio}
+\includegraphics[width=5.9in]{RStudio} \caption{Main panels of the RStudio user interface.}\label{fig:RStudio}
 \end{figure}
 
 \subsection{Running R Commands within RStudio}\label{rcommands}
@@ -295,12 +301,24 @@ manipulations and analyses. Instead, you have to type commands.
 \subsubsection{Commands are functions}\label{commands-are-functions}
 
 The general R layout of a command:
+
 \texttt{y\ \textless{}-\ f(x,\ arg\ =\ z)}
 
 This command means: Do something (function \texttt{f(arg\ =\ z)}) to
-data object \texttt{x} and store the result in data object \texttt{y}.
+\texttt{x} and save the result in \texttt{y}.
 
-If the left-hand data object (\texttt{y}):
+Both \texttt{x} and \texttt{y} can be a data set, a single value, a
+vector (series) of values, (code to create) a plot, analysis results,
+and so on. An important difference between R and SPSS is that R stores
+analysis results in such a way that you can use them in a next step of
+the analysis. You can extract the results that you are interested in and
+use them in calculations, tables, or plots (see Section
+\ref{firstanalysis}). This gives you maximum flexibility and full
+control.
+
+Let us refer to \texttt{x} and \texttt{y} as \emph{data objects}.
+
+If the left-hand data object \texttt{y}:
 
 \begin{itemize}
 \tightlist
@@ -308,20 +326,15 @@ If the left-hand data object (\texttt{y}):
   does not exist: a new data object is created in the project
   environment.
 \item
-  exists: data object is overwritten in the project environment.\\
+  exists: data object is overwritten in the project environment. There
+  cannot be more than one data object with the same name.
 \item
   is not named: output is sent to the screen (console or plot area).
 \end{itemize}
 
-If no function is specified, the data object (\texttt{x}) will be simply
-copied to another data object or to the screen, depending on \texttt{y}.
-
-A data object can be a data set, a list of analysis results, a function,
-or (code to create) a plot. An important difference between R and SPSS
-is that R stores analysis results in such a way that you can use them in
-a next step of the analysis. You can extract the results that you are
-interested in and use them in calculations, tables, or plots (see
-Section \ref{firstanalysis}).
+If no function is specified as in \texttt{y\ \textless{}-\ x}, the data
+object (\texttt{x}) will be simply copied to another data object or to
+the screen, depending on \texttt{y}.
 
 \subsubsection{Options are arguments to
 functions}\label{options-are-arguments-to-functions}
@@ -331,7 +344,12 @@ A function can take more input from the user than just a data object
 (\texttt{arg}, for example). The arguments for a function and their
 default values are listed in the help for the function (the vignette).
 The user may specify the value of arguments or rely on the default
-settings.
+settings. For example, the \texttt{mean()} function does \emph{not}
+remove missing values (\texttt{NA} in R) as default:
+\texttt{na.rm\ =\ FALSE}. If there is a missing value, the resulting
+mean is a missing value. That is great to warn you about missing values,
+but you would probably want to remove them. Set the \texttt{na.rm\ =}
+argument to \texttt{TRUE} (note the capitals).
 
 \begin{quote}
 Separate arguments and the data object by commas!
@@ -345,13 +363,13 @@ or list.
 
 Below are some examples of commands and the textual output that the
 \texttt{summary} function sends to the console, which also feature in
-Figure \ref{fig:RStudio}. Note that R is case-sensitive: uppercase
-letters are considered different letters than lowercase letters.
+Figure \ref{fig:RStudio}. Note that R is \emph{case-sensitive}:
+uppercase letters are considered different letters than lowercase
+letters.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Note that this code chunk is not executed (eval = FALSE). Instead, it is shown}
-\CommentTok{# to the reader (echo=TRUE).}
+\CommentTok{# Note that this code chunk is not executed (eval = FALSE).}
 
 \CommentTok{# Copy the student sleep data set (always available in R) to a data object that}
 \CommentTok{# we can inspect in the environment.}
@@ -390,7 +408,8 @@ We get the extra sleeping time variable (\texttt{extra}) from the
 frame, adding a dollar sign, and finally the name of the variable (list
 item): \texttt{sleepdata\$extra}. If you are typing a command at the R
 prompt in RStudio, a popup menu will list the items that are available
-once you add the dollar sign to the name of a data frame.
+once you add the dollar sign to the name of a data frame that is present
+in the environment.
 
 Results from statistical analyses (Section \ref{firstanalysis} and on)
 are also stored as lists. We can use the dollar sign to extract the
@@ -448,14 +467,14 @@ called the project's environment. Data objects in the environment are
 directly accessible to R.
 
 When you exit RStudio (and R), the data objects in the environment are
-deleted: memry is cleared. It is possible to save all data objects in
+deleted: memory is cleared. It is possible to save all data objects in
 memory as a file on disk, which is called a \emph{work space}, with the
 default file extension \emph{.RData}.
 
 Actually, RStudio saves the work space by default when you exit RStudio.
 This may sound great but it is strongly recommended NOT to save the work
 space. Your R code in the syntax file should create all data objects
-that you need. Your workspace, however, may contain additional objects
+that you need. Your work space, however, may contain additional objects
 that you created with the console or with syntax commands that have been
 removed. If you rerun the syntax when you reopen an RStudio project, you
 can check that all necessary data objects are created. If not, you will
@@ -468,16 +487,16 @@ To this end, adjust the settings in the \emph{Tools} menu under
 
 \subsection{Install and Load Packages}\label{packages}
 
-\begin{wrapfigure}{r}{0.3\textwidth}
-\includegraphics[width=1.9in]{installpackage} \caption{The RStudio dialog for installing packages.}\label{fig:installscreen}
-\end{wrapfigure}
-
 The base installation of R includes several important packages, such as
 the \texttt{base} package and the \texttt{stats} package, which contains
 many statistical analyses. These packages are loaded when you start R,
 so they are always ready for usage. Additional packages must be
 installed once but they must be loaded in every new R session that uses
 them.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+\includegraphics[width=1.9in]{installpackage} \caption{The RStudio dialog for installing packages.}\label{fig:installscreen}
+\end{wrapfigure}
 
 The easiest way to install a package is the \emph{Install
 Packages\ldots{}} option in the \emph{Tools} menu of RStudio. This opens
@@ -511,7 +530,8 @@ standards.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Load the packages that you need.}
+\CommentTok{# Load the packages that you need. Not executed here because the packages were}
+\CommentTok{# loaded in the first code chunk.}
 
 \CommentTok{# Install the tidyverse package from CRAN (only once!).}
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
@@ -560,7 +580,8 @@ and
 used to R, RStudio, and R Markdown}. The latter book has a nice
 \href{https://ismayc.github.io/rbasics-book/6-errors.html}{section on
 common programming errors in R}. I bet that you will encounter some of
-these problems.
+these problems, for example using \texttt{=} for \enquote{is equal to}
+where you must use \texttt{==}.
 
 The R code in Section \ref{rcommands} shows that running a function with
 a question mark added to the start, e.g., \texttt{?mean}, opens the help
@@ -594,13 +615,15 @@ SPSS file (\emph{glbwarm.sav}) has variable and value labels but the CSV
 file (\emph{glbwarm.csv}) only has numeric values. Download the data
 sets and save them in your R project directory.
 
-\subsubsection{Import SPSS data}\label{import-spss-data}
+\subsubsection{Import SPSS (or STATA or SAS)
+data}\label{import-spss-or-stata-or-sas-data}
 
 The recommended function to load an SPSS data file in R is
 \texttt{read\_spss()} in the \texttt{haven} package (Wickham \& Miller,
 \protect\hyperlink{ref-R-haven}{2019}). This function reads SPSS data
 and turns it into a \emph{data frame}, which is the R version of a data
-matrix.
+matrix. The \texttt{haven} package can also import STATA (DTA) and SAS
+data files.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -811,8 +834,8 @@ results. Let us first tabulate the results and plot them afterwards.
 In general, the \texttt{summary()} function presents the most basic
 results. For a linear regression model, it tells us the model formula,
 some statistics for the residuals, the values of the regression
-coefficients, and model fit statistics (R\textsuperscript{2} and an
-\emph{F} test).
+coefficients, and model fit statistics (\emph{R}\textsuperscript{2} and
+an \emph{F} test).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -968,7 +991,7 @@ tables It can create tables in formats required by some important
 sociological, political sciences, and economics journals. Unfortunately,
 it does not support the APA6 style. In contrast to the
 \texttt{papaja}package, it can also create HTML tables but it cannot
-create Word tables (import the PDf or HTML table in Word). It is
+create Word tables (import the PDF or HTML table in Word). It is
 possible to send the table created by \texttt{stargazer()} to a file, so
 you can include the code from the file in your (LaTeX or HTML) document.
 
@@ -995,20 +1018,21 @@ Instead of using packages that may produce tables that are not exactly
 what you want, you can create results tables yourself using the
 \texttt{broom} package (Robinson \& Hayes,
 \protect\hyperlink{ref-R-broom}{2019}), which is part of
-\texttt{tidyverse} but it must be loaded separately. The
-\texttt{broom}package extracts relevant results from statistical data
-objects as a data frame. This data frame can be easily manipulated and
-printed as a publication-ready table with the general \texttt{knitr}
-package (Xie,
+\texttt{tidyverse} but it must be loaded separately. The \texttt{broom}
+package extracts relevant results from statistical data objects as a
+data frame. This data frame can be saved as CSV file, which can be
+manually transformed into publication-ready tables using your favorite
+spreadsheet or word processor software. As an alternative, it can be
+manipulated and printed as a publication-ready table with R using the
+general \texttt{knitr} package (Xie,
 \protect\hyperlink{ref-R-knitr}{2019}\protect\hyperlink{ref-R-knitr}{b}),
-with the finer details managed by the \texttt{kableExtra} package (Zhu,
+with finer details managed by the \texttt{kableExtra} package (Zhu,
 \protect\hyperlink{ref-R-kableExtra}{2019}).
 
-It takes a little bit more time to learn using \texttt{knitr} but it is
-a good investment because you are probably going to use \texttt{knitr}
-anyway for tables that do not contain statistical results. The fine
-thing about \texttt{knitr} is that it gives good results in HTML, LaTeX,
-and Word.
+It takes a some time to learn using \texttt{knitr} but it is a good
+investment because you are probably going to use \texttt{knitr} anyway
+for tables that do not contain statistical results. The nice thing about
+\texttt{knitr} is that it gives good results in HTML, LaTeX, and Word.
 
 The \texttt{tidy()} function in the \texttt{broom} package extracts the
 estimated coefficients and associated test statistics and confidence
@@ -1049,9 +1073,9 @@ interaction effect.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{table}[H]
 
-\caption{\label{tab:unnamed-chunk-4}Unedited statistical results of the interaction model 
+\caption{\label{tab:broom}Unedited statistical results of the interaction model 
                  extracted with tidy() and shown with kable().}
 \centering
 \resizebox{\linewidth}{!}{ 
@@ -1073,9 +1097,18 @@ ideologyVery Conservative & -1.35 & 0.23 & -5.84 & 0.000 & -1.81 & -0.90\\
 \addlinespace
 negemot:I(age/10) & 0.06 & 0.02 & 4.11 & 0.000 & 0.03 & 0.09\\
 \bottomrule
-\end{tabular}
-}
+\end{tabular}}
 \end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Alternatively, save the tidied results data frame as CSV for use in, for}
+\CommentTok{# example, MS Excel and MS Word.}
+\KeywordTok{write_csv}\NormalTok{(govact_tidy2, }\StringTok{"myresultstable.csv"}\NormalTok{)}
+\CommentTok{# Note: use write_csv2() if you want semicolons instead of commas to separate}
+\CommentTok{# columns, which is required if your computer uses comma as decimal separator.}
+\end{Highlighting}
+\end{Shaded}
 
 This table is not as it should be according to the APA6 standard. The
 dependent variable should be mentioned, the column names should be
@@ -1094,6 +1127,15 @@ the table and adding a note.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Use this code for your own purpose:}
+\CommentTok{# 1. Change the name of the fitted model: replace govac_model2 everywhere.}
+\CommentTok{# 2. Change the old and new names of variables/parameters in mutate().}
+\CommentTok{# 3. Change the names in functions caption() and add_header_above().}
+
+\CommentTok{# Required packages.}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(broom)}
+\KeywordTok{library}\NormalTok{(knitr)}
 \CommentTok{# Load the kableExtra package for fine-tuning the table.}
 \KeywordTok{library}\NormalTok{(kableExtra)}
 
@@ -1196,7 +1238,7 @@ the table and adding a note.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}[!h]
+\begin{table}[H]
 
 \caption{\label{tab:regressiontablecustom}APA6 formatted statistical results extracted with tidy() and 
                  shown with kable() and kableExtra().}
@@ -1235,7 +1277,7 @@ If you want to see the code, download the
 Markdown file} that produces this paper. You can adapt this code for
 your own applications.
 
-\begin{table}[!h]
+\begin{table}[H]
 
 \caption{\label{tab:regressiontablecustom2}APA6 formatted statistical results extracted with tidy() and 
                  shown with kable() and kableExtra().}
@@ -1287,7 +1329,7 @@ the accompanying R code showcase some options.
 \KeywordTok{library}\NormalTok{(coefplot)}
 
 \CommentTok{# Plot of the regression coefficients of two models.}
-\KeywordTok{multiplot}\NormalTok{(govact_model, govact_model2, }\CommentTok{#the fitted models}
+\KeywordTok{multiplot}\NormalTok{(}\DataTypeTok{Model1 =}\NormalTok{ govact_model, }\DataTypeTok{Model2 =}\NormalTok{ govact_model2, }\CommentTok{#the fitted models (renamed)}
           \DataTypeTok{intercept =} \OtherTok{FALSE}\NormalTok{, }\CommentTok{#don't show intercept coefficient}
           \DataTypeTok{title =} \StringTok{""}\NormalTok{, }\CommentTok{#omit plot title}
           \DataTypeTok{newNames =} \KeywordTok{c}\NormalTok{(}\StringTok{"negemot"}\NormalTok{ =}\StringTok{ "Negative emotions"}\NormalTok{,}
@@ -1297,17 +1339,16 @@ the accompanying R code showcase some options.
 \NormalTok{                       ),}
           \DataTypeTok{plot.shapes=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{plot.linetypes=}\OtherTok{TRUE}\NormalTok{,}
           \DataTypeTok{dodgeHeight =} \FloatTok{0.8} \CommentTok{#distance between shapes}
-          \CommentTok{#custom names for the models}
-          \CommentTok{# names = c("Without interaction", "Neg. emotions*Age interaction")}
 \NormalTok{          ) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme_apa}\NormalTok{() }\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"bottom"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
+\begin{figure}[H]
+
 \centering
-\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/coefplot-1.pdf}
+\includegraphics[width=12cm]{HelpMyCollaboratorUsesR_files/figure-latex/coefplot-1.pdf}
 \caption{\label{fig:coefplot}Unstandardized regression coefficients for a
 model without and a model with an interaction effect. The fat and thin
 lines represent confidence intervals based on one and two standard
@@ -1368,7 +1409,7 @@ produce \texttt{ggplot2} plots.
 
 \begin{figure}[H]
 \centering
-\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/plotregline-1.pdf}
+\includegraphics[width=11cm]{HelpMyCollaboratorUsesR_files/figure-latex/plotregline-1.pdf}
 \caption{\label{fig:plotregline}The effect of negative emotions at different
 age levels, 95\% confidence intervals, and partial residuals. Note that
 The age groups are defined by default at the 10th, 50th, and 90th
@@ -1403,7 +1444,7 @@ the \texttt{car} package.
 
 \begin{figure}[H]
 \centering
-\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/plotresiduals-1.pdf}
+\includegraphics[width=12cm]{HelpMyCollaboratorUsesR_files/figure-latex/plotresiduals-1.pdf}
 \caption{\label{fig:plotresiduals}A residuals plot for the model predicting
 opinion about government intervention from political ideology, positive
 emotions, and the interaction between negative emotions and age.}
@@ -1482,6 +1523,13 @@ below creates an APA6-style contingency table.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Use this code for your own results:}
+\CommentTok{# 1. Change the names of the data frame and variables in chisq.test().}
+\CommentTok{# 2. Change the category names of the columns in select() and}
+\CommentTok{#    add_header_above(): replace female and male.}
+\CommentTok{#    If there are more than two columns (values), add those.}
+\CommentTok{# 3. Change the table's caption()}
+
 \CommentTok{# Create a contingency table with observed frequencies and standardized}
 \CommentTok{# residuals.}
 
@@ -1505,7 +1553,7 @@ below creates an APA6-style contingency table.
       \DataTypeTok{booktabs =} \OtherTok{TRUE} \CommentTok{#layout with header and bottom lines}
 \NormalTok{      ) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}
-    \CommentTok{#don't move table to top or bottomos a page}
+    \CommentTok{#don't move table to top or bottom of a page}
     \DataTypeTok{latex_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"hold_position"}\NormalTok{)}
 \NormalTok{  ) }\OperatorTok{%>%}
 \StringTok{  }\CommentTok{#add observed versus standardized residuals header}
@@ -1543,7 +1591,7 @@ Somewhat Conservative & 47 & -1.10 & 55 & 1.10\\
 Conservative & 45 & -1.82 & 60 & 1.82\\
 Very Conservative & 17 & -3.23 & 39 & 3.23\\
 \bottomrule
-\multicolumn{5}{l}{$Note$. $\chi^2(6, n = 815) = 20.11$, $p = .003$}\\
+\multicolumn{5}{l}{$Note$. $\chi^{2} (6, n = 815) = 20.11$, $p = .003$}\\
 \end{tabular}
 \end{table}
 
@@ -1587,7 +1635,7 @@ addition is the type of linear predictor and error distribution
 A fitted \texttt{glm()} model is very like a fitted \texttt{lm()} model,
 so functions for displaying coefficients (\texttt{coefplot} package) and
 fitted regression lines (\texttt{visreg} package) also work for these
-models. Thefunctions in the \texttt{car}package such as
+models. The functions in the \texttt{car}package such as
 \texttt{residualPlot()}, however, only works for linear models.
 
 Negative-binomial regression models can be fit with the
@@ -1702,7 +1750,10 @@ package.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Plot the mediation diagram with ggplot2.}
+\CommentTok{# Plot the mediation diagram with ggplot2. }
+\CommentTok{# }\AlertTok{NOTE}\CommentTok{: Make sure that you have stored the mediation results in an object named}
+\CommentTok{# fit_indirect. Change the outcome variable name in the code below.}
+
 \CommentTok{# Create coordinates for the variable names.}
 \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.3}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.7}\NormalTok{), }\CommentTok{#hor. coordinates of labels}
            \DataTypeTok{y =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.1}\NormalTok{), }\CommentTok{#vert. coordinates of labels}
@@ -1710,7 +1761,7 @@ package.
            \DataTypeTok{vjust =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.5}\NormalTok{),}
            \DataTypeTok{label =} \KeywordTok{c}\NormalTok{(fit_indirect}\OperatorTok{$}\NormalTok{treat, }\CommentTok{#treatment}
 \NormalTok{                     fit_indirect}\OperatorTok{$}\NormalTok{mediator, }\CommentTok{#moderator}
-                     \StringTok{"govact"}\NormalTok{), }\CommentTok{#outcome variable}
+                     \StringTok{"govact"}\NormalTok{), }\CommentTok{#outcome variable name       ## ADAPT! ##}
            \CommentTok{# Create start and end coordinates for the arrows}
            \DataTypeTok{xstart =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.3}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.5}\NormalTok{),}
            \DataTypeTok{xend =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\FloatTok{0.7}\NormalTok{),}
@@ -1747,9 +1798,9 @@ package.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{figure}
 \centering
-\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/mediation1plot-1.pdf}
+\includegraphics[width=12cm]{HelpMyCollaboratorUsesR_files/figure-latex/mediation1plot-1.pdf}
 \caption{\label{fig:mediation1plot}Main results of a mediation model
 presented as a causal diagram.}
 \end{figure}
@@ -1776,7 +1827,7 @@ for more plotting options.
 
 \begin{figure}[H]
 \centering
-\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/mediation1sensitivity-1.pdf}
+\includegraphics[width=12cm]{HelpMyCollaboratorUsesR_files/figure-latex/mediation1sensitivity-1.pdf}
 \caption{\label{fig:mediation1sensitivity}The sensitivity of the indirect
 effect to confounders.}
 \end{figure}
@@ -1812,14 +1863,14 @@ mediator and models with parallel mediation: two or more mediators
 without effects between mediators. Like the PROCESS macro for SPSS (A.
 F. Hayes,
 \protect\hyperlink{ref-HayesIntroductionMediationModeration2013}{2013}),
-the \texttt{psych::mediat()} function performs all regression analyses
-in one go and it uses bootstrapping to estimate the confidence interval
-of the indirect effect.
+the \texttt{mediat()} function in the package performs all regression
+analyses in one go and it uses bootstrapping to estimate the confidence
+interval of the indirect effect.
 
 This function automatically plots the results as a causal diagram. It
 cannot handle factors, so you have to replace them by 0/1 variables
 beforehand. The following code shows how to create a dichotomous
-variable \texttt{female} (0 = no, 1 = yes) fom the factor \texttt{sex}
+variable \texttt{female} (0 = no, 1 = yes) from the factor \texttt{sex}
 in \texttt{glbwarm\_spss} (using the \texttt{tidyverse} function
 \texttt{mutate()}):
 
@@ -1840,12 +1891,12 @@ function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Mean-centering in basic R (ignoring missing values.}
+\CommentTok{# Mean-centering in basic R, ignoring missing values.}
 \NormalTok{dataset}\OperatorTok{$}\NormalTok{newvariable <-}\StringTok{ }\NormalTok{dataset}\OperatorTok{$}\NormalTok{variable }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(dataset}\OperatorTok{$}\NormalTok{variable, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
-\CommentTok{# Mean-centering with tidyverse (ignoring missing values.}
+\CommentTok{# Mean-centering in the data frame with tidyverse, ignoring missing values.}
 \NormalTok{dataset <-}\StringTok{ }\NormalTok{dataset }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{newvariable =}\NormalTok{ variable }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(dataset}\OperatorTok{$}\NormalTok{variable, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
-\CommentTok{# Mean-centering within a regression formula (ignoring missing values.}
+\CommentTok{# Mean-centering within a regression formula, ignoring missing values.}
 \NormalTok{fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\KeywordTok{I}\NormalTok{(variable }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(dataset}\OperatorTok{$}\NormalTok{variable, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}\OperatorTok{*}\NormalTok{anothervariable)}
 \end{Highlighting}
 \end{Shaded}
@@ -1874,7 +1925,11 @@ level, while \texttt{(1\ +\ age\ \textbar{}\ subject)} adds varying
 intercepts and varying slopes for age at the subject level as well as a
 covariance between the random intercepts and slopes. Note that
 \texttt{subject} must be the name of a variable identifying subjects as
-higher level units.
+higher level units. For the specification of more complicated multilevel
+models, see
+\href{https://rpsychologist.com/r-guide-longitudinal-lme-lmer}{Using R
+and lme/lmer to fit different two- and three-level longitudinal models}
+(Magnusson, \protect\hyperlink{ref-magnussonUsingLmeLmer2015}{2015}).
 
 Non-linear multilevel models, for example, multilevel logistic
 regression models, are notably hard to estimate. For this type of
@@ -1882,7 +1937,10 @@ models, a Bayesian approach with MCMC estimation is usually preferred.
 The \texttt{rstanarm} package (Gabry \& Goodrich,
 \protect\hyperlink{ref-R-rstanarm}{2019}) contains functions that have
 the same structure and the same type of output as the multilevel
-functions in the \texttt{lme4} package.
+functions in the \texttt{lme4} package. The companion manual
+\href{https://wdenooy.github.io/Switch2Bayesian/HelpMyCollaboratorGoesBayesian.html\#32_r_rstanarm_package}{\emph{Help,
+My Collaborator Goes Bayesian!}} shows how to estimate multilevel models
+with the \texttt{rstanarm} package.
 
 \subsection{Structural Equation Modelling}\label{sem}
 
@@ -2040,7 +2098,7 @@ Markdown document to find out how it is done.
 \subsubsection{Code chunks}\label{code-chunks}
 
 \begin{figure}[h]
-\includegraphics[width=6.86in]{RMarkdown} \caption{Part of the R Markdown document HelpMyCollaboratorUsesR.Rmd.}\label{fig:RMarkdown}
+\includegraphics[width=\linewidth]{RMarkdown} \caption{Part of the R Markdown document HelpMyCollaboratorUsesR.Rmd.}\label{fig:RMarkdown}
 \end{figure}
 
 Figure \ref{fig:RMarkdown} shows a small part of the R Markdown document
@@ -2191,7 +2249,7 @@ which we recommend to use. Let us turn to this template now.
 
 \subsection{APA6 Journal Article Template}\label{apa6template}
 
-\begin{wrapfigure}{r}{0.45\textwidth}
+\begin{wrapfigure}{r}{0.42\textwidth}
 \includegraphics[width=2.65in]{template} \caption{R Markdown templates dialog box.}\label{fig:template}
 \end{wrapfigure}
 
@@ -2343,6 +2401,13 @@ collaborators.
 
 RStudio also supports another version control software: Subversion.
 
+\subsection{Conclusion}\label{conclusion}
+
+\begin{quote}
+Do what you have been doing but do it more transparently and efficiently
+with R and RMarkdown.
+\end{quote}
+
 \newpage
 
 \section{References}\label{references}
@@ -2406,6 +2471,11 @@ models}. Retrieved from
 Leifeld, P. (2017). \emph{Texreg: Conversion of r regression output to
 latex or html tables}. Retrieved from
 \url{https://CRAN.R-project.org/package=texreg}
+
+\hypertarget{ref-magnussonUsingLmeLmer2015}{}
+Magnusson, K. (2015, April). Using R and lme/lmer to fit different two-
+and three-level longitudinal models - R Psychologist. \emph{R
+Psychologist}.
 
 \hypertarget{ref-oomsJsonlitePackagePractical2014}{}
 Ooms, J. (2014). The jsonlite Package: A Practical and Consistent
