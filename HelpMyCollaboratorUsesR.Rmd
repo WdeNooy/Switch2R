@@ -40,13 +40,13 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "doc" #Other options: "jou" (journal format), "man" (manuscript format)
 output            :
-  papaja::apa6_pdf: 
-    toc: no         #no table of contents
-    number_sections: true #number sections (for referencing)
   bookdown::html_document2: #additional HTML output option
     toc: yes        #with a table of contents
     toc_depth: 3    #using three levels
     toc_float: yes  #which is situated in the left margin
+  papaja::apa6_pdf: 
+    toc: no         #no table of contents
+    number_sections: true #number sections (for referencing)
   papaja::apa6_word:
     toc: no         #no table of contents
 geometry: #page setup for PDF (LaTeX) output
@@ -1096,7 +1096,7 @@ In the functions of the `nlme`package, `lme()` for linear models and `nlme()` fo
 
 The functions `lmer()` and `glmer()` in the `lme4` package estimate multilevel models for linear and generalized linear models respectively. Random effects are added to the model formula using a vertical bar (`|`). For example, `(1 | subject)` adds random intercepts at the subject level, while `(1 + age | subject)` adds varying intercepts and varying slopes for age at the subject level as well as a covariance between the random intercepts and slopes. Note that `subject` must be the name of a variable identifying subjects as higher level units. For the specification of more complicated multilevel models, see [Using R and lme/lmer to fit different two- and three-level longitudinal models](https://rpsychologist.com/r-guide-longitudinal-lme-lmer) [@magnussonUsingLmeLmer2015].
 
-Non-linear multilevel models, for example, multilevel logistic regression models, are notably hard to estimate. For this type of models, a Bayesian approach with MCMC estimation is usually preferred. The `rstanarm` package [@R-rstanarm] contains functions that have the same structure and the same type of output as the multilevel functions in the `lme4` package. The companion manual [*Help, My Collaborator Goes Bayesian!*](https://wdenooy.github.io/Switch2Bayesian/HelpMyCollaboratorGoesBayesian.html#32_r_rstanarm_package) shows how to estimate multilevel models with the `rstanarm` package.
+Non-linear multilevel models, for example, multilevel logistic regression models, are notably hard to estimate. For this type of models, a Bayesian approach with MCMC estimation is usually preferred. The `rstanarm` package [@R-rstanarm] contains functions that have the same structure and the same type of output as the multilevel functions in the `lme4` package. The companion manual [*Help, My Collaborator Goes Bayesian!*](https://wdenooy.github.io/Switch2Bayesian/index.html#32_r_rstanarm_package) shows how to estimate multilevel models with the `rstanarm` package.
 
 ## Structural Equation Modelling {#sem}
 
