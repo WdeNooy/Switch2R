@@ -19,18 +19,14 @@ authornote: |
 abstract: |
   This is a concise introduction to using R for reproducible statistical analyses. It offers a guide and reference for researchers who want to perform statistical analyses in R or write reproducible reports in R Markdown but are new to the software or have not used it for some time. They want it done as soon as possible and their data is ready for analysis.
   
-  
-  
-  
-  Instead of a bottom-up introduction to R and R Markdown, this paper presents examples, which researchers can adapt for their own use. Imitate and apply! R code is shown that can be adapted by changing names of data sets and variables. This document itself is written in R Markdown. Just download the R Markdown document (https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd) to see how things are done. 
-  A PDF version of this web page is available at https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.pdf.
+  Instead of a bottom-up introduction to R and R Markdown, this paper presents examples, which researchers can adapt for their own use. Imitate and apply! R code is shown that can be adapted by changing names of data sets and variables. This document itself is written in R Markdown. Download the [zip file](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.zip), which contains the R MArkdown document, to see how things are done. The zip file also contains a PDF version of this web page.
   <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
   <!-- https://tinyurl.com/ybremelq -->
 keywords          : "R; statistical analyses; reproducible research; R Markdown"
 wordcount         : 6874 "(added manually using the wordcountaddin add-in)"
 bibliography      : ["r-references.bib", "references.bib"]
 link-citations    : true #citation year is link to list of references
-floatsintext      : yes #if no: tables and figures at the end of the document
+floatsintext      : yes #if no: tables and figures at the end of the document in "man" classoption
 figurelist        : no
 tablelist         : no
 footnotelist      : no
@@ -66,7 +62,7 @@ set.seed(42) # Seed for random number generation
 knitr::opts_chunk$set(
   cache.extra = knitr::rand_seed,
   eval = TRUE, #by deault, execute the code in code chunks
-  echo = TRUE, #by default, show the contents of code chunks (to learn R)
+  echo = FALSE, #TRUE, #by default, show the contents of code chunks (to learn R)
   message = FALSE, #by default, do not show messages
   warning = FALSE, #by default, do not show warnings
   fig.pos = "H" #keep plots as close as possible to the code
@@ -331,7 +327,7 @@ This section applies linear regression to demonstrate the principles and peculia
 
 ## Open a Data Set
 
-Our example data set addresses attitudes towards global warming. The data set was collected by Erik Nisbet and it is available at [Andrew Hayes' website](http://afhayes.com/introduction-to-mediation-moderation-and-conditional-process-analysis.html). 
+Our example data set addresses attitudes towards global warming. The data set was collected by Erik Nisbet and it is available at [Andrew Hayes' website](http://afhayes.com/introduction-to-mediation-moderation-and-conditional-process-analysis.html) under __Click here to download the data files used in this book.__. The data files are also included in the zip file [HelpMyCollaboratorUsesR.zip](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.zip). 
 
 The data set is available in several formats including SPSS and CSV. The SPSS file (_glbwarm.sav_) has variable and value labels but the CSV file (_glbwarm.csv_) only has numeric values. Download the data sets and save them in your R project directory.
 
@@ -846,7 +842,6 @@ visreg(govact_model2,
   #set the axis labels
   labs(x = "Negative emotions",
        y = "Opinion on government intervention")
-
 ```
 
 Residual plots are commonly used to check regression assumptions. A fitted regression model contains the residuals. The residuals of the second regression model estimated in this section are available as `govact_model2$residuals`. 
@@ -1164,7 +1159,7 @@ Anyone who has the R Markdown document and the data sets used in it can reproduc
 
 ## Integrating Text and Code {#integratingtextcode}
 
-Download the R Markdown document [HelpMyCollaboratorUsesR.Rmd](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.Rmd) that generates the document you are now reading, save it to your current R project directory, and open it in RStudio to see an example. The document illustrates many features of R Markdown, so you may use it as a reference for your own work. If you see a feature in the [PDF](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.pdf) or web version of the document that you want to use, check the R Markdown document to find out how it is done. 
+Download the materials accompanying this text [HelpMyCollaboratorUsesR.zip](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.zip). It contains the R Markdown document _HelpMyCollaboratorUsesR.Rmd_ (and all other files), which generates the document you are now reading. Extract the files and save them to your current R project directory. Open _HelpMyCollaboratorUsesR.Rmd_ in RStudio to see how many features of R Markdown are used as a reference for your own work. If you see a feature in the [PDF](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.pdf) or web version of the document that you want to use, check the R Markdown document to find out how it is done. 
 
 ### Code chunks
 
