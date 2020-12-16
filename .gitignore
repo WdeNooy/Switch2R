@@ -2,3 +2,11 @@
 .Rhistory
 .RData
 .Ruserdata
+.aux
+.log
+.gz
+.tex
+.aux
+.ttt
+HelpMyCollaboratorUsesR_files/
+HelpMyCollaboratorUsesR.aux

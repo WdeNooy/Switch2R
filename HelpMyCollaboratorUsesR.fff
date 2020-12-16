@@ -1,0 +1,71 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[H]
+\includegraphics[width=5.9in]{RStudio} \caption{Main panels of the RStudio user interface.}\label{fig:RStudio}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[H]
+\includegraphics[width=2.96in]{Settings} \caption{Workspace settings in the Tools menu under Global Options.}\label{fig:RStudiosettings}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[H]
+\includegraphics[width=1.9in]{installpackage} \caption{The RStudio dialog for installing packages.}\label{fig:installscreen}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/coefplot-1.pdf}
+\caption{\label{fig:coefplot}Unstandardized regression coefficients for a
+model without and a model with an interaction effect. The fat and thin
+lines represent confidence intervals based on one and two standard
+errors.}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/plotregline-1.pdf}
+\caption{\label{fig:plotregline}The effect of negative emotions at different
+age levels, 95\% confidence intervals, and partial residuals. Note that
+The age groups are defined by default at the 10th, 50th, and 90th
+percentiles. Partial residuals have the color of the closest
+percentile.}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/plotresiduals-1.pdf}
+\caption{\label{fig:plotresiduals}A residuals plot for the model predicting
+opinion about government intervention from political ideology, positive
+emotions, and the interaction between negative emotions and age.}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/mediation1plot-1.pdf}
+\caption{\label{fig:mediation1plot}Main results of a mediation model
+presented as a causal diagram.}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{HelpMyCollaboratorUsesR_files/figure-latex/mediation1sensitivity-1.pdf}
+\caption{\label{fig:mediation1sensitivity}The sensitivity of the indirect
+effect to confounders.}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[h]
+\includegraphics[width=6.86in]{RMarkdown} \caption{Part of the R Markdown document HelpMyCollaboratorUsesR.Rmd.}\label{fig:RMarkdown}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[H]
+\includegraphics[width=2.65in]{template} \caption{R Markdown templates dialog box.}\label{fig:template}
+\end{figure*}

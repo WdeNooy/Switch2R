@@ -19,7 +19,7 @@ authornote: |
 abstract: |
   This is a concise introduction to using R for reproducible statistical analyses. It offers a guide and reference for researchers who want to perform statistical analyses in R or write reproducible reports in R Markdown but are new to the software or have not used it for some time. They want it done as soon as possible and their data is ready for analysis.
   
-  Instead of a bottom-up introduction to R and R Markdown, this paper presents examples, which researchers can adapt for their own use. Imitate and apply! R code is shown that can be adapted by changing names of data sets and variables. This document itself is written in R Markdown. Download the [zip file](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.zip), which contains the R MArkdown document, to see how things are done. The zip file also contains a PDF version of this web page.
+  Instead of a bottom-up introduction to R and R Markdown, this paper presents examples, which researchers can adapt for their own use. Imitate and apply! R code is shown that can be adapted by changing names of data sets and variables. This document itself is written in R Markdown. Download the [zip file](https://wdenooy.github.io/Switch2R/HelpMyCollaboratorUsesR.zip), which contains the R Markdown document, to see how things are done. The zip file also contains a PDF version of this web page.
   <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
   <!-- https://tinyurl.com/ybremelq -->
 keywords          : "R; statistical analyses; reproducible research; R Markdown"
@@ -62,7 +62,7 @@ set.seed(42) # Seed for random number generation
 knitr::opts_chunk$set(
   cache.extra = knitr::rand_seed,
   eval = TRUE, #by deault, execute the code in code chunks
-  echo = FALSE, #TRUE, #by default, show the contents of code chunks (to learn R)
+  echo = TRUE, #by default, show the contents of code chunks (to learn R)
   message = FALSE, #by default, do not show messages
   warning = FALSE, #by default, do not show warnings
   fig.pos = "H" #keep plots as close as possible to the code
@@ -731,7 +731,7 @@ govact_tidy %>%
   select(term, estimate.x, sig.x, CI.x, estimate.y, sig.y, CI.y) %>%
   #add rows with R2 and F
   bind_rows(
-    data.frame(
+    tibble(
       #a line for R2 and F for each model
       term = c("$R^2$", "$F$"),
       estimate.x = c(
@@ -757,10 +757,9 @@ govact_tidy %>%
           govact_glance2$p.value < 0.05 ~ "$*$",
           TRUE ~ "" #all remaining cases
         )
-      ),
-      stringsAsFactors = FALSE
+      )
     )
-  ) %>%
+  ) %>% 
   #create a table from the data
   kable( #the data come from the 'pipe',
       digits = c(0, 2, 0, 0, 2, 0, 0),
